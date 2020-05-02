@@ -23,7 +23,7 @@ namespace Budget_Lab
 
             var period = new Period(start, end);
             return _budgetRepo.GetAll()
-                       .Sum(budget => budget.OverlappingAmount(period));
+                              .Sum(budget => budget.OverlappingAmount(period));
         }
     }
 }
