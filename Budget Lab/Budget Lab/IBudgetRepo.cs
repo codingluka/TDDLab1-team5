@@ -32,5 +32,10 @@ namespace Budget_Lab
         {
             return Amount / Days();
         }
+
+        public Period CreatePeriod()
+        {
+            return new Period(FirstDay(), LastDay());
+        }
     }
 }
