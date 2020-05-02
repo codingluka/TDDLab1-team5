@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace Budget_Lab
 {
@@ -10,33 +14,18 @@ namespace Budget_Lab
             End = end;
         }
 
-        public DateTime Start { get; private set; }
-        public DateTime End   { get; private set; }
+        public DateTime Start { get; }
+        public DateTime End   { get; }
 
         public int OverlappingDays(Budget currentBudget)
         {
-            DateTime overlappingEnd = currentBudget.LastDay() < End
+            var overlappingEnd = currentBudget.LastDay() < End
                 ? currentBudget.LastDay()
                 : End;
 
-            DateTime overlappingStart = currentBudget.FirstDay() > Start
+            var overlappingStart = currentBudget.FirstDay() > Start
                 ? currentBudget.FirstDay()
                 : Start;
-            if (currentBudget.YearMonth == Start.ToString("yyyyMM"))
-            {
-                // overlappingEnd = currentBudget.LastDay();
-                // overlappingStart = Start;
-            }
-            else if (currentBudget.YearMonth == End.ToString("yyyyMM"))
-            {
-                // overlappingEnd = End;
-                // overlappingStart = currentBudget.FirstDay();
-            }
-            else
-            {
-                // overlappingEnd = currentBudget.LastDay();
-                // overlappingStart = currentBudget.FirstDay();
-            }
 
             return (overlappingEnd - overlappingStart).Days + 1;
         }
