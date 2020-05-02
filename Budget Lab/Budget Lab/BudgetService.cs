@@ -59,7 +59,7 @@ namespace Budget_Lab
                             var overlappingStart = start;
                             var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
                             // var dailyAmount = startOneDay;
-                            var dailyAmount = currentBudget.Amount / currentBudget.Days();
+                            var dailyAmount = currentBudget.DailyAmount();
                             midAmount = overlappingDays * dailyAmount;
                         }
                         else if (currentBudget.YearMonth == end.ToString("yyyyMM"))
