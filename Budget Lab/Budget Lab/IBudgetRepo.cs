@@ -20,8 +20,12 @@ namespace Budget_Lab
 
         public DateTime LastDay()
         {
-            var daysInBudgetMonth = DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month);
-            return new DateTime(FirstDay().Year, FirstDay().Month, daysInBudgetMonth);
+            return new DateTime(FirstDay().Year, FirstDay().Month, Days());
+        }
+
+        public int Days()
+        {
+            return DateTime.DaysInMonth(FirstDay().Year, FirstDay().Month);
         }
     }
 }
