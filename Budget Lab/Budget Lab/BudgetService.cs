@@ -20,21 +20,20 @@ namespace Budget_Lab
             {
                 return 0;
             }
-            
+
             var budgets = this._budgetRepo.GetAll();
 
             var startAmount = budgets
                               .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"))
                               ?.Amount ?? 0;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
-            decimal startOneDay = startAmount / startMonthDays;
-            
+            var startOneDay =  (decimal)startAmount / startMonthDays;
+
             var endAmount = budgets
                             .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"))
                             ?.Amount ?? 0;
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
-            decimal endOneDay = endAmount / endMonthDays;
-
+            var endOneDay = (decimal)endAmount / endMonthDays;
 
             var intervalDays = (end - start).Days + 1;
             //// 當天
@@ -42,7 +41,7 @@ namespace Budget_Lab
             {
                 return startOneDay;
             }
-            
+
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
 
             if (diffMonth < 2)
