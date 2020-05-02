@@ -42,30 +42,28 @@ namespace Budget_Lab
             }
             else
             {
-                // var amountOfLastMonth = end.Day * endOneDay;
                 var tmpMid = (decimal) 0;
 
-                var startOfMiddleMonth = new DateTime(start.Year, start.Month, 1);
-                var currentMonth = startOfMiddleMonth;
+                var currentMonth = new DateTime(start.Year, start.Month, 1);
                 while (currentMonth <= end)
                 {
-                    var budget = budgets.FirstOrDefault(b => b.YearMonth == currentMonth.ToString("yyyyMM"));
+                    var currentBudget = budgets.FirstOrDefault(b => b.YearMonth == currentMonth.ToString("yyyyMM"));
                     var midAmount = 0m;
-                    if (budget != null)
+                    if (currentBudget != null)
                     {
-                        if (budget.YearMonth == start.ToString("yyyyMM"))
+                        if (currentBudget.YearMonth == start.ToString("yyyyMM"))
                         {
                             var amountOfFirstMonth = (startMonthDays - start.Day + 1) * startOneDay;
                             midAmount = amountOfFirstMonth;
                         }
-                        else if (budget.YearMonth == end.ToString("yyyyMM"))
+                        else if (currentBudget.YearMonth == end.ToString("yyyyMM"))
                         {
                             var amountOfLastMonth = end.Day * endOneDay;
                             midAmount = amountOfLastMonth;
                         }
                         else
                         {
-                            midAmount = budget.Amount;
+                            midAmount = currentBudget.Amount;
                         }
                     }
 
