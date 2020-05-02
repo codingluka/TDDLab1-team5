@@ -22,36 +22,8 @@ namespace Budget_Lab
 
             var budgets = this._budgetRepo.GetAll();
 
-            var startAmount = budgets
-                              .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"))
-                              ?.Amount ?? 0;
-            var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
-            var startOneDay = (decimal) startAmount / startMonthDays;
-
-            var endAmount = budgets
-                            .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"))
-                            ?.Amount ?? 0;
-            var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
-            var endOneDay = (decimal) endAmount / endMonthDays;
-
-            if (start.ToString("yyyyMM") == end.ToString("yyyyMM"))
-            {
-                //// 當月超過1日
-                var intervalDays = (end - start).Days + 1;
-                return intervalDays * startOneDay;
-            }
-            else
-            {
-                var period = new Period(start, end);
-                var result =  0m;
-
-                foreach (var currentBudget in budgets)
-                {
-                    result += currentBudget.OverlappingAmount(period);
-                }
-
-                return result;
-            }
+            var period = new Period(start, end);
+            return budgets.Sum(budget => budget.OverlappingAmount(period));
         }
     }
 }
