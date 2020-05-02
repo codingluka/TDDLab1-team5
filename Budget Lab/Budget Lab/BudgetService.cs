@@ -42,6 +42,7 @@ namespace Budget_Lab
             }
             else
             {
+                var period = new Period(start, end);
                 var tmpMid = (decimal) 0;
 
                 var currentMonth = new DateTime(start.Year, start.Month, 1);
@@ -50,7 +51,8 @@ namespace Budget_Lab
                     var currentBudget = budgets.FirstOrDefault(b => b.YearMonth == currentMonth.ToString("yyyyMM"));
                     if (currentBudget != null)
                     {
-                        var overlappingDays = new Period(start, end).OverlappingDays( new Period(currentBudget.FirstDay(), currentBudget.LastDay()));
+                        var overlappingDays =
+                            period.OverlappingDays(CreatePeriod(currentBudget));
                         tmpMid += overlappingDays * currentBudget.DailyAmount();
                     }
 
@@ -59,6 +61,11 @@ namespace Budget_Lab
 
                 return tmpMid;
             }
+        }
+
+        private static Period CreatePeriod(Budget currentBudget)
+        {
+            return new Period(currentBudget.FirstDay(), currentBudget.LastDay());
         }
     }
 }
