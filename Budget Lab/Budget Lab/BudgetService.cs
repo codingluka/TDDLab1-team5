@@ -46,12 +46,19 @@ namespace Budget_Lab
                 var amountOfLastMonth = end.Day * endOneDay;
                 var tmpMid = (decimal) 0;
                 var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
-                for (var i = 1; i < diffMonth - 1; i++)
+
+                var startOfMiddleMonth = new DateTime(start.Year, start.Month, 1).AddMonths(1);
+                var endOfMiddleMonth = new DateTime(end.Year, end.Month, 1);
+                var currentMonth = startOfMiddleMonth;
+                // for (var i = 1; i < diffMonth - 1; i++)
+                while (currentMonth < endOfMiddleMonth)
                 {
-                    var midAmount = budgets
-                                    .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
-                                    ?.Amount ?? 0;
+                    // var midAmount = budgets.FirstOrDefault(b => b.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
+                    var midAmount = budgets.FirstOrDefault(b => b.YearMonth == currentMonth.ToString("yyyyMM"))
+                                           ?.Amount ?? 0; 
                     tmpMid += midAmount;
+
+                    currentMonth = currentMonth.AddMonths(1);
                 }
 
                 return amountOfFirstMonth + tmpMid + amountOfLastMonth;
