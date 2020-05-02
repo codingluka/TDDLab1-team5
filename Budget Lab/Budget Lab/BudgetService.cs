@@ -53,7 +53,14 @@ namespace Budget_Lab
                     {
                         if (currentBudget.YearMonth == start.ToString("yyyyMM"))
                         {
-                            var amountOfFirstMonth = (startMonthDays - start.Day + 1) * startOneDay;
+                            // var amountOfFirstMonth = (startMonthDays - start.Day + 1) * startOneDay;
+                            var firstDayOfBudget = DateTime.ParseExact(currentBudget.YearMonth+"01","yyyyMMdd",null);
+                            var daysInBudgetMonth = DateTime.DaysInMonth(firstDayOfBudget.Year, firstDayOfBudget.Month);
+                            var lastDayOfBudget = new DateTime(firstDayOfBudget.Year, firstDayOfBudget.Month, daysInBudgetMonth);
+
+                            // var overlappingDays = (startMonthDays - start.Day + 1)
+                            var overlappingDays = (lastDayOfBudget - start).Days + 1;
+                            var amountOfFirstMonth = overlappingDays * startOneDay;
                             midAmount = amountOfFirstMonth;
                         }
                         else if (currentBudget.YearMonth == end.ToString("yyyyMM"))
