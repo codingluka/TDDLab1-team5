@@ -53,7 +53,7 @@ namespace Budget_Lab
                     {
                         if (currentBudget.YearMonth == start.ToString("yyyyMM"))
                         {
-                            var firstDayOfBudget = currentBudget.GetFirstDayOfBudget();
+                            var firstDayOfBudget = currentBudget.FirstDay();
                             var daysInBudgetMonth = DateTime.DaysInMonth(firstDayOfBudget.Year, firstDayOfBudget.Month);
                             var lastDayOfBudget = new DateTime(firstDayOfBudget.Year, firstDayOfBudget.Month, daysInBudgetMonth);
 

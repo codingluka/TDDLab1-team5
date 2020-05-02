@@ -13,7 +13,7 @@ namespace Budget_Lab
         public string YearMonth { get; set; }
         public int Amount { get; set; }
 
-        public DateTime GetFirstDayOfBudget()
+        public DateTime FirstDay()
         {
             return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
         }
