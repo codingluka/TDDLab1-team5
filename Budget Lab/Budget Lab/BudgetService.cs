@@ -43,14 +43,14 @@ namespace Budget_Lab
             else
             {
                 var period = new Period(start, end);
-                var tmpMid = (decimal) 0;
+                var result =  0m;
 
                 foreach (var currentBudget in budgets)
                 {
-                    tmpMid += currentBudget.OverlappingAmount(period);
+                    result += currentBudget.OverlappingAmount(period);
                 }
 
-                return tmpMid;
+                return result;
             }
         }
     }
