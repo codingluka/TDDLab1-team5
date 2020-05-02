@@ -12,51 +12,51 @@ namespace Budget_Lab
         {
             this._budgetRepo = budgetRepo;
         }
+
         public decimal Query(DateTime start, DateTime end)
         {
             var budgets = this._budgetRepo.GetAll();
-            var intervalDays = (end - start).Days + 1;
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
             var startAmount = budgets
-                .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"))
-                ?.Amount ?? 0;
+                              .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"))
+                              ?.Amount ?? 0;
             var endAmount = budgets
-                .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"))
-                ?.Amount ?? 0;
+                            .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"))
+                            ?.Amount ?? 0;
 
             decimal startOneDay = startAmount / startMonthDays;
             decimal endOneDay = endAmount / endMonthDays;
 
             //// end < start
-            if (intervalDays < 1)
+            if (end < start)
             {
                 return 0;
             }
 
+            var intervalDays = (end - start).Days + 1;
             //// 當天
             if (intervalDays == 1)
             {
                 return startOneDay;
             }
 
-
-            if (diffMonth<2)
+            if (diffMonth < 2)
             {
                 //// 當月超過1日
-                return (decimal)(intervalDays) * startOneDay;
+                return (decimal) (intervalDays) * startOneDay;
             }
             else
             {
                 var s = (startMonthDays - start.Day + 1) * startOneDay;
                 var e = end.Day * endOneDay;
                 var tmpMid = (decimal) 0;
-                for (var i = 1; i < diffMonth-1; i++)
+                for (var i = 1; i < diffMonth - 1; i++)
                 {
                     var midAmount = budgets
-                        .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
-                        ?.Amount ?? 0;
+                                    .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
+                                    ?.Amount ?? 0;
                     tmpMid += midAmount;
                 }
 
@@ -65,6 +65,5 @@ namespace Budget_Lab
 
             return 0;
         }
-
     }
 }
