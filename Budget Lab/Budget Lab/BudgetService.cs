@@ -51,25 +51,28 @@ namespace Budget_Lab
                     var midAmount = 0m;
                     if (currentBudget != null)
                     {
+                        DateTime overlappingEnd;
+                        DateTime overlappingStart;
+                        int overlappingDays;
                         if (currentBudget.YearMonth == start.ToString("yyyyMM"))
                         {
-                            var overlappingEnd = currentBudget.LastDay();
-                            var overlappingStart = start;
-                            var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
+                            overlappingEnd = currentBudget.LastDay();
+                            overlappingStart = start;
+                            overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
                             midAmount = overlappingDays * currentBudget.DailyAmount();
                         }
                         else if (currentBudget.YearMonth == end.ToString("yyyyMM"))
                         {
-                            var overlappingEnd = end;
-                            var overlappingStart = currentBudget.FirstDay();
-                            var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
+                            overlappingEnd = end;
+                            overlappingStart = currentBudget.FirstDay();
+                            overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
                             midAmount = overlappingDays * currentBudget.DailyAmount();
                         }
                         else
                         {
-                            var overlappingEnd = currentBudget.LastDay();
-                            var overlappingStart = currentBudget.FirstDay();
-                            var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
+                            overlappingEnd = currentBudget.LastDay();
+                            overlappingStart = currentBudget.FirstDay();
+                            overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
                             midAmount = overlappingDays * currentBudget.DailyAmount();
                         }
                     }
