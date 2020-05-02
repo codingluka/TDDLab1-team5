@@ -18,22 +18,24 @@ namespace Budget_Lab
             DateTime overlappingEnd = currentBudget.LastDay() < End
                 ? currentBudget.LastDay()
                 : End;
-            
-            DateTime overlappingStart;
+
+            DateTime overlappingStart = currentBudget.FirstDay() > Start
+                ? currentBudget.FirstDay()
+                : Start;
             if (currentBudget.YearMonth == Start.ToString("yyyyMM"))
             {
                 // overlappingEnd = currentBudget.LastDay();
-                overlappingStart = Start;
+                // overlappingStart = Start;
             }
             else if (currentBudget.YearMonth == End.ToString("yyyyMM"))
             {
                 // overlappingEnd = End;
-                overlappingStart = currentBudget.FirstDay();
+                // overlappingStart = currentBudget.FirstDay();
             }
             else
             {
                 // overlappingEnd = currentBudget.LastDay();
-                overlappingStart = currentBudget.FirstDay();
+                // overlappingStart = currentBudget.FirstDay();
             }
 
             return (overlappingEnd - overlappingStart).Days + 1;
