@@ -45,20 +45,10 @@ namespace Budget_Lab
                 var period = new Period(start, end);
                 var tmpMid = (decimal) 0;
 
-                // var currentMonth = new DateTime(start.Year, start.Month, 1);
-                // while (currentMonth <= end)
-                // {
                 foreach (var currentBudget in budgets)
                 {
-                    // var currentBudget = budgets.FirstOrDefault(b => b.YearMonth == currentMonth.ToString("yyyyMM"));
-                    // if (currentBudget != null)
-                    // {
-                        tmpMid += currentBudget.OverlappingAmount(period);
-                    // }
+                    tmpMid += currentBudget.OverlappingAmount(period);
                 }
-
-                //     currentMonth = currentMonth.AddMonths(1);
-                // }
 
                 return tmpMid;
             }
