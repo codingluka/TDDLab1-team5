@@ -42,11 +42,9 @@ namespace Budget_Lab
             }
             else
             {
-                // var amountOfFirstMonth = (startMonthDays - start.Day + 1) * startOneDay;
                 var amountOfLastMonth = end.Day * endOneDay;
                 var tmpMid = (decimal) 0;
 
-                // var startOfMiddleMonth = new DateTime(start.Year, start.Month, 1).AddMonths(1);
                 var startOfMiddleMonth = new DateTime(start.Year, start.Month, 1);
                 var endOfMiddleMonth = new DateTime(end.Year, end.Month, 1);
                 var currentMonth = startOfMiddleMonth;
@@ -73,7 +71,6 @@ namespace Budget_Lab
                 }
 
                 return tmpMid + amountOfLastMonth;
-                // return amountOfFirstMonth + tmpMid + amountOfLastMonth;
             }
         }
     }
