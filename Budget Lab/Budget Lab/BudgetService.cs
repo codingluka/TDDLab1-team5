@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Budget_Lab
@@ -20,10 +21,9 @@ namespace Budget_Lab
                 return 0;
             }
 
-            var budgets = this._budgetRepo.GetAll();
-
             var period = new Period(start, end);
-            return budgets.Sum(budget => budget.OverlappingAmount(period));
+            return _budgetRepo.GetAll()
+                       .Sum(budget => budget.OverlappingAmount(period));
         }
     }
 }
