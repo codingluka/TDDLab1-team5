@@ -37,5 +37,11 @@ namespace Budget_Lab
         {
             return new Period(FirstDay(), LastDay());
         }
+
+        public int OverlappingAmount(Period period)
+        {
+            var overlappingDays = period.OverlappingDays(CreatePeriod());
+            return overlappingDays * DailyAmount();
+        }
     }
 }
