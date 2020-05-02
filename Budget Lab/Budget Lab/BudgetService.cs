@@ -51,8 +51,13 @@ namespace Budget_Lab
                 var currentMonth = startOfMiddleMonth;
                 while (currentMonth < endOfMiddleMonth)
                 {
-                    var midAmount = budgets.FirstOrDefault(b => b.YearMonth == currentMonth.ToString("yyyyMM"))
-                                           ?.Amount ?? 0; 
+                    var budget = budgets.FirstOrDefault(b => b.YearMonth == currentMonth.ToString("yyyyMM"));
+                    var midAmount = 0m;
+                    if (budget != null)
+                    {
+                        midAmount = budget.Amount;
+                    }
+
                     tmpMid += midAmount;
 
                     currentMonth = currentMonth.AddMonths(1);
