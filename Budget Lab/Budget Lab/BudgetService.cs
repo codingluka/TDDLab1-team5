@@ -15,6 +15,12 @@ namespace Budget_Lab
 
         public decimal Query(DateTime start, DateTime end)
         {
+            //// end < start
+            if (end < start)
+            {
+                return 0;
+            }
+            
             var budgets = this._budgetRepo.GetAll();
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
@@ -29,11 +35,6 @@ namespace Budget_Lab
             decimal startOneDay = startAmount / startMonthDays;
             decimal endOneDay = endAmount / endMonthDays;
 
-            //// end < start
-            if (end < start)
-            {
-                return 0;
-            }
 
             var intervalDays = (end - start).Days + 1;
             //// 當天
