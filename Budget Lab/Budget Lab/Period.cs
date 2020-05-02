@@ -17,16 +17,14 @@ namespace Budget_Lab
         public DateTime Start { get; }
         public DateTime End   { get; }
 
-        public int OverlappingDays(Budget currentBudget)
+        public int OverlappingDays(Period another)
         {
-            var anotherPeriod = new Period(currentBudget.FirstDay(), currentBudget.LastDay());
-
-            var overlappingEnd = anotherPeriod.End < End
-                ? anotherPeriod.End
+            var overlappingEnd = another.End < End
+                ? another.End
                 : End;
 
-            var overlappingStart = anotherPeriod.Start > Start
-                ? anotherPeriod.Start
+            var overlappingStart = another.Start > Start
+                ? another.Start
                 : Start;
 
             return (overlappingEnd - overlappingStart).Days + 1;
