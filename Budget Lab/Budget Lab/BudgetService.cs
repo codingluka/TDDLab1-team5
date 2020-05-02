@@ -53,17 +53,13 @@ namespace Budget_Lab
                     {
                         if (currentBudget.YearMonth == start.ToString("yyyyMM"))
                         {
-                            var lastDayOfBudget = currentBudget.LastDay();
-
-                            var overlappingEnd = lastDayOfBudget;
+                            var overlappingEnd = currentBudget.LastDay();
                             var overlappingStart = start;
                             var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
-                            // var dailyAmount = startOneDay;
                             midAmount = overlappingDays * currentBudget.DailyAmount();
                         }
                         else if (currentBudget.YearMonth == end.ToString("yyyyMM"))
                         {
-                            // var overlappingDays = end.Day;
                             var overlappingEnd = end;
                             var overlappingStart = currentBudget.FirstDay();
                             var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
@@ -74,7 +70,6 @@ namespace Budget_Lab
                             var overlappingEnd = currentBudget.LastDay();
                             var overlappingStart = currentBudget.FirstDay();
                             var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
-                            // midAmount = currentBudget.Amount;
                             midAmount = overlappingDays * currentBudget.DailyAmount();
                         }
                     }
