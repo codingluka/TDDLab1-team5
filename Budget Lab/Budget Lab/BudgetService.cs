@@ -36,7 +36,8 @@ namespace Budget_Lab
 
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
 
-            if (diffMonth < 2)
+            // if (diffMonth < 2)
+            if (start.ToString("yyyyMM")==end.ToString("yyyyMM"))
             {
                 //// 當月超過1日
                 var intervalDays = (end - start).Days + 1;
