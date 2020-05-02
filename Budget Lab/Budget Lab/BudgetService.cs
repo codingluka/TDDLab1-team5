@@ -53,7 +53,7 @@ namespace Budget_Lab
                     {
                         if (currentBudget.YearMonth == start.ToString("yyyyMM"))
                         {
-                            var firstDayOfBudget = GetFirstDayOfBudget(currentBudget);
+                            var firstDayOfBudget = currentBudget.GetFirstDayOfBudget();
                             var daysInBudgetMonth = DateTime.DaysInMonth(firstDayOfBudget.Year, firstDayOfBudget.Month);
                             var lastDayOfBudget = new DateTime(firstDayOfBudget.Year, firstDayOfBudget.Month, daysInBudgetMonth);
 
@@ -80,12 +80,6 @@ namespace Budget_Lab
                 return tmpMid;
                 // return tmpMid + amountOfLastMonth;
             }
-        }
-
-        private static DateTime GetFirstDayOfBudget(Budget currentBudget)
-        {
-            var firstDayOfBudget = DateTime.ParseExact(currentBudget.YearMonth + "01", "yyyyMMdd", null);
-            return firstDayOfBudget;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Budget_Lab
 {
@@ -11,5 +12,10 @@ namespace Budget_Lab
     {
         public string YearMonth { get; set; }
         public int Amount { get; set; }
+
+        public DateTime GetFirstDayOfBudget()
+        {
+            return DateTime.ParseExact(YearMonth + "01", "yyyyMMdd", null);
+        }
     }
 }
