@@ -15,7 +15,6 @@ namespace Budget_Lab
 
         public decimal Query(DateTime start, DateTime end)
         {
-            //// end < start
             if (end < start)
             {
                 return 0;
@@ -27,27 +26,21 @@ namespace Budget_Lab
                               .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"))
                               ?.Amount ?? 0;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
-            var startOneDay =  (decimal)startAmount / startMonthDays;
+            var startOneDay = (decimal) startAmount / startMonthDays;
 
             var endAmount = budgets
                             .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"))
                             ?.Amount ?? 0;
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
-            var endOneDay = (decimal)endAmount / endMonthDays;
-
-            var intervalDays = (end - start).Days + 1;
-            //// 當天
-            if (intervalDays == 1)
-            {
-                return startOneDay;
-            }
+            var endOneDay = (decimal) endAmount / endMonthDays;
 
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
 
             if (diffMonth < 2)
             {
                 //// 當月超過1日
-                return (decimal) (intervalDays) * startOneDay;
+                var intervalDays = (end - start).Days + 1;
+                return intervalDays * startOneDay;
             }
             else
             {
@@ -64,8 +57,6 @@ namespace Budget_Lab
 
                 return s + tmpMid + e;
             }
-
-            return 0;
         }
     }
 }
