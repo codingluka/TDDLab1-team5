@@ -50,7 +50,7 @@ namespace Budget_Lab
                     var currentBudget = budgets.FirstOrDefault(b => b.YearMonth == currentMonth.ToString("yyyyMM"));
                     if (currentBudget != null)
                     {
-                        var overlappingDays = OverlappingDays(new Period(start, end), currentBudget);
+                        var overlappingDays = new Period(start, end).OverlappingDays(currentBudget);
                         tmpMid += overlappingDays * currentBudget.DailyAmount();
                     }
 
@@ -59,29 +59,6 @@ namespace Budget_Lab
 
                 return tmpMid;
             }
-        }
-
-        private static int OverlappingDays(Period period, Budget currentBudget)
-        {
-            DateTime overlappingEnd;
-            DateTime overlappingStart;
-            if (currentBudget.YearMonth == period.Start.ToString("yyyyMM"))
-            {
-                overlappingEnd = currentBudget.LastDay();
-                overlappingStart = period.Start;
-            }
-            else if (currentBudget.YearMonth == period.End.ToString("yyyyMM"))
-            {
-                overlappingEnd = period.End;
-                overlappingStart = currentBudget.FirstDay();
-            }
-            else
-            {
-                overlappingEnd = currentBudget.LastDay();
-                overlappingStart = currentBudget.FirstDay();
-            }
-
-            return (overlappingEnd - overlappingStart).Days + 1;
         }
     }
 }
