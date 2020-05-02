@@ -34,10 +34,7 @@ namespace Budget_Lab
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
             var endOneDay = (decimal) endAmount / endMonthDays;
 
-            var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
-
-            // if (diffMonth < 2)
-            if (start.ToString("yyyyMM")==end.ToString("yyyyMM"))
+            if (start.ToString("yyyyMM") == end.ToString("yyyyMM"))
             {
                 //// 當月超過1日
                 var intervalDays = (end - start).Days + 1;
@@ -48,6 +45,7 @@ namespace Budget_Lab
                 var s = (startMonthDays - start.Day + 1) * startOneDay;
                 var e = end.Day * endOneDay;
                 var tmpMid = (decimal) 0;
+                var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
                 for (var i = 1; i < diffMonth - 1; i++)
                 {
                     var midAmount = budgets
