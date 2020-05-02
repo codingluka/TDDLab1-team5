@@ -14,8 +14,8 @@ namespace Budget_Lab
             End = end;
         }
 
-        public DateTime Start { get; }
-        public DateTime End   { get; }
+        private DateTime Start { get; }
+        private DateTime End   { get; }
 
         public int OverlappingDays(Period another)
         {
