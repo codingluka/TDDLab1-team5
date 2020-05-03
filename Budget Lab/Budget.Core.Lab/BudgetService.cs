@@ -55,8 +55,6 @@ namespace Budget.Core.Lab
             }
 
             return s + tmpMid + e;
-
-            return 0;
         }
 
         private Budget_Lab.Budget GetBudget(DateTime start)
