@@ -21,19 +21,18 @@ namespace Budget.Core.Lab
             }
 
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
-
-            var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
-            var startBudget = GetBudget(start);
-            var startAmount = GetBudgetAmount(startBudget);
-
+            
+            
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
             var endBudget = GetBudget(end);
-            var endAmount = endBudget
-                ?.Amount ?? 0;
+            var endAmount = endBudget ?.Amount ?? 0;
 
 
             var diffDays = end.Subtract(start).TotalDays + 1;
 
+            var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
+            var startBudget = GetBudget(start);
+            var startAmount = startBudget ?.Amount ?? 0;
             decimal startOneDay = startAmount / startMonthDays;
 
             if (diffMonth < 2)
@@ -43,6 +42,7 @@ namespace Budget.Core.Lab
             }
 
             var s = (startMonthDays - start.Day + 1) * startOneDay;
+            
             decimal endOneDay = endAmount / endMonthDays;
             var e = end.Day * endOneDay;
             var tmpMid = (decimal) 0;
@@ -50,7 +50,7 @@ namespace Budget.Core.Lab
             {
                 var currentBudget = GetBudget(start.AddMonths(i));
                 var midAmount = currentBudget
-                    ?.Amount ?? 0;
+                                    ?.Amount ?? 0;
                 tmpMid += midAmount;
             }
 
@@ -59,7 +59,7 @@ namespace Budget.Core.Lab
 
         private static int GetBudgetAmount(Budget budget)
         {
-            return budget?.Amount ?? 0;
+            return budget ?.Amount ?? 0;
         }
 
         private Budget GetBudget(DateTime start)
