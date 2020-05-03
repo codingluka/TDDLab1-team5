@@ -57,9 +57,9 @@ namespace Budget.Core.Lab
             return s + tmpMid + e;
         }
 
-        private static int GetBudgetAmount(Budget startBudget)
+        private static int GetBudgetAmount(Budget budget)
         {
-            var startAmount = startBudget
+            var startAmount = budget
                 ?.Amount ?? 0;
             return startAmount;
         }
