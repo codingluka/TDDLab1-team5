@@ -23,9 +23,6 @@ namespace Budget.Core.Lab
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             
             
-            var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
-            var endBudget = GetBudget(end);
-            var endAmount = endBudget ?.Amount ?? 0;
 
 
             var diffDays = end.Subtract(start).TotalDays + 1;
@@ -43,6 +40,9 @@ namespace Budget.Core.Lab
 
             var s = (startMonthDays - start.Day + 1) * startOneDay;
             
+            var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
+            var endBudget = GetBudget(end);
+            var endAmount = endBudget ?.Amount ?? 0;
             decimal endOneDay = endAmount / endMonthDays;
             var e = end.Day * endOneDay;
             var tmpMid = (decimal) 0;
