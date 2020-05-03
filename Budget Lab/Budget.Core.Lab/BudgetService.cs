@@ -48,9 +48,9 @@ namespace Budget.Core.Lab
             var tmpMid = (decimal) 0;
             for (var i = 1; i < diffMonth - 1; i++)
             {
-                var midAmount = this._budgetRepo.GetAll()
-                    .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
-                    ?.Amount ?? 0;
+                var currentBudget = GetBudget(start.AddMonths(i));
+                var midAmount = currentBudget
+                                    ?.Amount ?? 0;
                 tmpMid += midAmount;
             }
 
