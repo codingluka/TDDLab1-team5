@@ -20,17 +20,17 @@ namespace Budget.Core.Lab
                 return 0;
             }
 
-            var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
-            var diffDays = end.Subtract(start).TotalDays + 1;
 
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
             var startBudget = GetBudget(start);
             var startAmount = startBudget?.Amount ?? 0;
             decimal startOneDay = startAmount / startMonthDays;
 
+            var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             if (diffMonth < 2)
             {
                 //// 當月超過1日
+                var diffDays = end.Subtract(start).TotalDays + 1;
                 return (decimal) diffDays * startOneDay;
             }
 
