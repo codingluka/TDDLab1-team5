@@ -23,10 +23,10 @@ namespace Budget_Lab
             var budgets = this._budgetRepo.GetAll();
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
-            var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
             var startAmount = budgets
                 .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"))
                 ?.Amount ?? 0;
+            var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
             var endAmount = budgets
                 .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"))
                 ?.Amount ?? 0;
