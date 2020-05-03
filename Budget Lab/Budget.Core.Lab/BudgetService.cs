@@ -19,6 +19,7 @@ namespace Budget_Lab
             {
                 return 0;
             }
+
             var budgets = this._budgetRepo.GetAll();
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
@@ -34,12 +35,6 @@ namespace Budget_Lab
             var diffDays = end.Subtract(start).TotalDays + 1;
 
             decimal startOneDay = startAmount / startMonthDays;
-            //// 當天
-            // if (diffDays == 1)
-            // {
-            //     return startOneDay;
-            // }
-
 
             if (diffMonth < 2)
             {
