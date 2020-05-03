@@ -20,7 +20,6 @@ namespace Budget.Core.Lab
                 return 0;
             }
 
-
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
             var startBudget = GetBudget(start);
             var startAmount = startBudget?.Amount ?? 0;
@@ -42,7 +41,7 @@ namespace Budget.Core.Lab
             decimal endOneDay = endAmount / endMonthDays;
             var e = end.Day * endOneDay;
 
-            var tmpMid = (decimal) 0;
+            var tmpMid = 0m;
             for (var i = 1; i < diffMonth - 1; i++)
             {
                 var currentBudget = GetBudget(start.AddMonths(i));
