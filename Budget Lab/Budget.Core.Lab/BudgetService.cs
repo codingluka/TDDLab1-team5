@@ -22,10 +22,11 @@ namespace Budget.Core.Lab
             }
 
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
+            
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
             var startBudget = GetBudget(start);
-            var startAmount = startBudget
-                                  ?.Amount ?? 0;
+            var startAmount = GetBudgetAmount(startBudget);
+            
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
             var endBudget = GetBudget(end);
             var endAmount = endBudget
@@ -55,6 +56,13 @@ namespace Budget.Core.Lab
             }
 
             return s + tmpMid + e;
+        }
+
+        private static int GetBudgetAmount(Budget_Lab.Budget startBudget)
+        {
+            var startAmount = startBudget
+                ?.Amount ?? 0;
+            return startAmount;
         }
 
         private Budget_Lab.Budget GetBudget(DateTime start)
