@@ -27,8 +27,6 @@ namespace Budget.Core.Lab
             var startAmount = startBudget
                                   ?.Amount ?? 0;
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
-            // var endBudget = this._budgetRepo.GetAll()
-            //     .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"));
             var endBudget = GetBudget(end);
             var endAmount = endBudget
                                 ?.Amount ?? 0;
