@@ -1,14 +1,14 @@
 ﻿#region
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using Budget_Lab;
 using NSubstitute;
 using Xunit;
 
 #endregion
 
-namespace Budget_Lab
+namespace Budget.Core.Lab
 {
     public class BudgetServiceTest
     {
@@ -24,7 +24,7 @@ namespace Budget_Lab
         [Fact]
         public void end小於start()
         {
-            GivenBudgets(new Budget {YearMonth = "202004", Amount = 30000});
+            GivenBudgets(new Budget_Lab.Budget {YearMonth = "202004", Amount = 30000});
             QueryAmountShouldBe(0,
                                 new DateTime(2020, 4, 01),
                                 new DateTime(2020, 3, 01));
@@ -33,7 +33,7 @@ namespace Budget_Lab
         [Fact]
         public void 當天()
         {
-            GivenBudgets(new Budget {YearMonth = "202004", Amount = 30000});
+            GivenBudgets(new Budget_Lab.Budget {YearMonth = "202004", Amount = 30000});
             QueryAmountShouldBe(1000,
                                 new DateTime(2020, 4, 01),
                                 new DateTime(2020, 4, 01));
@@ -42,7 +42,7 @@ namespace Budget_Lab
         [Fact]
         public void 當月N天()
         {
-            GivenBudgets(new Budget {YearMonth = "202004", Amount = 30000});
+            GivenBudgets(new Budget_Lab.Budget {YearMonth = "202004", Amount = 30000});
             QueryAmountShouldBe(10000,
                                 new DateTime(2020, 4, 01),
                                 new DateTime(2020, 4, 10));
@@ -52,9 +52,9 @@ namespace Budget_Lab
         public void 跨三月()
         {
             GivenBudgets(
-                new Budget {YearMonth = "202004", Amount = 30000},
-                new Budget {YearMonth = "202005", Amount = 3100},
-                new Budget {YearMonth = "202006", Amount = 300}
+                new Budget_Lab.Budget {YearMonth = "202004", Amount = 30000},
+                new Budget_Lab.Budget {YearMonth = "202005", Amount = 3100},
+                new Budget_Lab.Budget {YearMonth = "202006", Amount = 300}
             );
 
             QueryAmountShouldBe(6120,
@@ -66,8 +66,8 @@ namespace Budget_Lab
         public void 跨兩月()
         {
             GivenBudgets(
-                new Budget {YearMonth = "202004", Amount = 30000},
-                new Budget {YearMonth = "202005", Amount = 3100}
+                new Budget_Lab.Budget {YearMonth = "202004", Amount = 30000},
+                new Budget_Lab.Budget {YearMonth = "202005", Amount = 3100}
             );
             QueryAmountShouldBe(3200,
                                 new DateTime(2020, 4, 28),
@@ -78,7 +78,7 @@ namespace Budget_Lab
         public void invalid_period()
         {
             GivenBudgets(
-                new Budget {YearMonth = "202004", Amount = 30000}
+                new Budget_Lab.Budget {YearMonth = "202004", Amount = 30000}
             );
             QueryAmountShouldBe(0,
                                 new DateTime(2020, 5, 28),
@@ -90,7 +90,7 @@ namespace Budget_Lab
             Assert.Equal(expected, _budgetService.Query(start, end));
         }
 
-        private void GivenBudgets(params Budget[] budgets)
+        private void GivenBudgets(params Budget_Lab.Budget[] budgets)
         {
             _budgetRepo.GetAll().Returns(budgets.ToList());
         }
