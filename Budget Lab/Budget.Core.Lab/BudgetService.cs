@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Budget_Lab;
 
 namespace Budget.Core.Lab
 {
@@ -58,14 +57,14 @@ namespace Budget.Core.Lab
             return s + tmpMid + e;
         }
 
-        private static int GetBudgetAmount(Budget_Lab.Budget startBudget)
+        private static int GetBudgetAmount(Budget startBudget)
         {
             var startAmount = startBudget
                 ?.Amount ?? 0;
             return startAmount;
         }
 
-        private Budget_Lab.Budget GetBudget(DateTime start)
+        private Budget GetBudget(DateTime start)
         {
             return this._budgetRepo.GetAll()
                 .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"));

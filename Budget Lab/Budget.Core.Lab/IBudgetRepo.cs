@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Budget_Lab
+namespace Budget.Core.Lab
 {
     public interface IBudgetRepo
     {
