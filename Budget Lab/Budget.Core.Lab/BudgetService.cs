@@ -1,8 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Linq;
+using Budget_Lab;
 
-namespace Budget_Lab
+namespace Budget.Core.Lab
 {
     public class BudgetService
     {
