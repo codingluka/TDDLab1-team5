@@ -12,6 +12,7 @@ namespace Budget_Lab
         {
             this._budgetRepo = budgetRepo;
         }
+
         public decimal Query(DateTime start, DateTime end)
         {
             var allAmount = this._budgetRepo.GetAll();
@@ -25,15 +26,14 @@ namespace Budget_Lab
                 .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"))
                 ?.Amount ?? 0;
 
-            decimal startOneDay = startAmount / startMonthDays;
-            decimal endOneDay = endAmount / endMonthDays;
 
-            var diffDays = end.Subtract(start).TotalDays+1;
+            var diffDays = end.Subtract(start).TotalDays + 1;
             if (diffDays < 1)
             {
                 return 0;
             }
 
+            decimal startOneDay = startAmount / startMonthDays;
             //// 當天
             if (diffDays == 1)
             {
@@ -41,17 +41,18 @@ namespace Budget_Lab
             }
 
 
-            if (diffMonth<2)
+            if (diffMonth < 2)
             {
                 //// 當月超過1日
-                return (decimal)(diffDays) * startOneDay;
+                return (decimal) (diffDays) * startOneDay;
             }
             else
             {
                 var s = (startMonthDays - start.Day + 1) * startOneDay;
+                decimal endOneDay = endAmount / endMonthDays;
                 var e = end.Day * endOneDay;
                 var tmpMid = (decimal) 0;
-                for (var i = 1; i < diffMonth-1; i++)
+                for (var i = 1; i < diffMonth - 1; i++)
                 {
                     var midAmount = allAmount
                         .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
@@ -64,6 +65,5 @@ namespace Budget_Lab
 
             return 0;
         }
-
     }
 }
