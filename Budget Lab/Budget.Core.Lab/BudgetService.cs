@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Budget_Lab;
 
@@ -20,15 +21,13 @@ namespace Budget.Core.Lab
                 return 0;
             }
 
-            var budgets = this._budgetRepo.GetAll();
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
-            var startBudget = budgets
-                .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"));
+            var startBudget = GetBudget(start);
             var startAmount = startBudget
                                   ?.Amount ?? 0;
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
-            var endBudget = budgets
+            var endBudget = this._budgetRepo.GetAll()
                 .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"));
             var endAmount = endBudget
                                 ?.Amount ?? 0;
@@ -50,7 +49,7 @@ namespace Budget.Core.Lab
             var tmpMid = (decimal) 0;
             for (var i = 1; i < diffMonth - 1; i++)
             {
-                var midAmount = budgets
+                var midAmount = this._budgetRepo.GetAll()
                     .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
                     ?.Amount ?? 0;
                 tmpMid += midAmount;
@@ -59,6 +58,12 @@ namespace Budget.Core.Lab
             return s + tmpMid + e;
 
             return 0;
+        }
+
+        private Budget_Lab.Budget GetBudget(DateTime start)
+        {
+            return this._budgetRepo.GetAll()
+                .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"));
         }
     }
 }
