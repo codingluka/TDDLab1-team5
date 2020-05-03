@@ -15,7 +15,6 @@ namespace Budget_Lab
         public decimal Query(DateTime start, DateTime end)
         {
             var allAmount = this._budgetRepo.GetAll();
-            var diffDays = end.Subtract(start).TotalDays+1;
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
@@ -29,7 +28,7 @@ namespace Budget_Lab
             decimal startOneDay = startAmount / startMonthDays;
             decimal endOneDay = endAmount / endMonthDays;
 
-            //// end < start
+            var diffDays = end.Subtract(start).TotalDays+1;
             if (diffDays < 1)
             {
                 return 0;
