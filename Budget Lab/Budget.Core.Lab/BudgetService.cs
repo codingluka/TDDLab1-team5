@@ -15,14 +15,14 @@ namespace Budget_Lab
 
         public decimal Query(DateTime start, DateTime end)
         {
-            var allAmount = this._budgetRepo.GetAll();
+            var budgets = this._budgetRepo.GetAll();
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
             var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
-            var startAmount = allAmount
+            var startAmount = budgets
                 .FirstOrDefault(i => i.YearMonth == start.ToString("yyyyMM"))
                 ?.Amount ?? 0;
-            var endAmount = allAmount
+            var endAmount = budgets
                 .FirstOrDefault(i => i.YearMonth == end.ToString("yyyyMM"))
                 ?.Amount ?? 0;
 
@@ -54,7 +54,7 @@ namespace Budget_Lab
                 var tmpMid = (decimal) 0;
                 for (var i = 1; i < diffMonth - 1; i++)
                 {
-                    var midAmount = allAmount
+                    var midAmount = budgets
                         .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
                         ?.Amount ?? 0;
                     tmpMid += midAmount;
