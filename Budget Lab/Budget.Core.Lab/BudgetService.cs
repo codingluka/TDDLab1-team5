@@ -15,6 +15,10 @@ namespace Budget_Lab
 
         public decimal Query(DateTime start, DateTime end)
         {
+            if (end < start)
+            {
+                return 0;
+            }
             var budgets = this._budgetRepo.GetAll();
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) + 1;
             var startMonthDays = DateTime.DaysInMonth(start.Year, start.Month);
@@ -28,10 +32,6 @@ namespace Budget_Lab
 
 
             var diffDays = end.Subtract(start).TotalDays + 1;
-            if (diffDays < 1)
-            {
-                return 0;
-            }
 
             decimal startOneDay = startAmount / startMonthDays;
             //// 當天
@@ -46,22 +46,20 @@ namespace Budget_Lab
                 //// 當月超過1日
                 return (decimal) (diffDays) * startOneDay;
             }
-            else
-            {
-                var s = (startMonthDays - start.Day + 1) * startOneDay;
-                decimal endOneDay = endAmount / endMonthDays;
-                var e = end.Day * endOneDay;
-                var tmpMid = (decimal) 0;
-                for (var i = 1; i < diffMonth - 1; i++)
-                {
-                    var midAmount = budgets
-                        .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
-                        ?.Amount ?? 0;
-                    tmpMid += midAmount;
-                }
 
-                return s + tmpMid + e;
+            var s = (startMonthDays - start.Day + 1) * startOneDay;
+            decimal endOneDay = endAmount / endMonthDays;
+            var e = end.Day * endOneDay;
+            var tmpMid = (decimal) 0;
+            for (var i = 1; i < diffMonth - 1; i++)
+            {
+                var midAmount = budgets
+                    .FirstOrDefault(j => j.YearMonth == start.AddMonths(i).ToString("yyyyMM"))
+                    ?.Amount ?? 0;
+                tmpMid += midAmount;
             }
+
+            return s + tmpMid + e;
 
             return 0;
         }
