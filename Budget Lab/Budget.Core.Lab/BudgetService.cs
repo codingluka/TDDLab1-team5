@@ -35,10 +35,10 @@ namespace Budget_Lab
 
             decimal startOneDay = startAmount / startMonthDays;
             //// 當天
-            if (diffDays == 1)
-            {
-                return startOneDay;
-            }
+            // if (diffDays == 1)
+            // {
+            //     return startOneDay;
+            // }
 
 
             if (diffMonth < 2)
