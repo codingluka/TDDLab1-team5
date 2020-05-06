@@ -44,8 +44,7 @@ namespace Budget.Core.Lab
             for (var i = 1; i < diffMonth; i++)
             {
                 var currentBudget = GetBudget(start.AddMonths(i));
-                var midAmount = currentBudget
-                    ?.Amount ?? 0;
+                var midAmount = currentBudget ?.Amount ?? 0;
                 tmpMid += midAmount;
             }
 
