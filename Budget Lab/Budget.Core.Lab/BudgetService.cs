@@ -52,11 +52,6 @@ namespace Budget.Core.Lab
             return s + tmpMid + e;
         }
 
-        private static int GetBudgetAmount(Budget budget)
-        {
-            return budget?.Amount ?? 0;
-        }
-
         private Budget GetBudget(DateTime start)
         {
             return this._budgetRepo.GetAll()
