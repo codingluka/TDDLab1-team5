@@ -26,13 +26,13 @@ namespace Budget.Core.Lab
             decimal startOneDay = startAmount / startMonthDays;
             var s = (startMonthDays - start.Day + 1) * startOneDay;
 
-            var endMonthDays = DateTime.DaysInMonth(end.Year, end.Month);
+            var endMonthDays = GetDaysInMonth(end);
             var endBudget = GetBudget(end);
             var endAmount = endBudget?.Amount ?? 0;
             decimal endOneDay = endAmount / endMonthDays;
             var e = end.Day * endOneDay;
+            
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) ;
-
             if (diffMonth < 1)
             {
                 //// 當月超過1日
@@ -50,6 +50,11 @@ namespace Budget.Core.Lab
             }
 
             return s + tmpMid + e;
+        }
+
+        private int GetDaysInMonth(DateTime date)
+        {
+            return DateTime.DaysInMonth(date.Year, date.Month);
         }
 
         private Budget GetBudget(DateTime start)
