@@ -20,7 +20,12 @@ namespace Budget.Core.Lab
             var monthLastDay = new DateTime(month.Year, month.Month, DateTime.DaysInMonth(month.Year, month.Month));
             var periodStart = monthFirstDay <= period.Start ? period.Start : monthFirstDay;
             var periodEnd = period.End <= monthLastDay ? period.End : monthLastDay;
-            return (periodEnd - periodStart).Days + 1;
+            if (periodEnd >= periodStart)
+            {
+                return (periodEnd - periodStart).Days + 1;
+            }
+
+            return 0;
         }
 
         public decimal BudgetDailyAmount()
