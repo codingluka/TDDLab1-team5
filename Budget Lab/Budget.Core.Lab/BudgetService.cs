@@ -21,8 +21,14 @@ namespace Budget.Core.Lab
                 return 0;
             }
 
-            var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
             var result = 0m;
+            foreach (var budget in this._budgetRepo.GetAll())
+            {
+                result += budget.GetOverlapBudget(new Period(start, end));
+            }
+
+            return result;
+            var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
             for (var i = 0; i < diffMonth + 1; i++)
             {
                 var currentMonth = start.AddMonths(i);
