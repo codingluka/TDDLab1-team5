@@ -16,12 +16,9 @@ namespace Budget.Core.Lab
 
         public decimal Query(DateTime start, DateTime end)
         {
-            if (end < start)
-            {
-                // return 0;
-            }
-
-            return this._budgetRepo.GetAll().Sum(budget => budget.GetOverlapBudget(new Period(start, end)));
+            return _budgetRepo
+                .GetAll()
+                .Sum(budget => budget.GetOverlapBudget(new Period(start, end)));
         }
 
         private int GetDaysInMonth(DateTime date)
