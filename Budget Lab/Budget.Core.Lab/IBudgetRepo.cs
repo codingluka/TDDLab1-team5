@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Budget.Core.Lab
 {
@@ -11,5 +12,15 @@ namespace Budget.Core.Lab
     {
         public string YearMonth { get; set; }
         public int Amount { get; set; }
+
+        public int GetAvailableDays(Period period)
+        {
+            var month = DateTime.ParseExact(this.YearMonth,"yyyyMM",null); 
+            var monthFirstDay = new DateTime(month.Year,month.Month,01);
+            var monthLastDay = new DateTime(month.Year,month.Month,DateTime.DaysInMonth(month.Year,month.Month));
+            var periodStart = monthFirstDay <= period.Start ? period.Start : monthFirstDay;
+            var periodEnd = period.End <= monthLastDay ? period.End : monthLastDay;
+            return (periodEnd - periodStart).Days + 1;
+        }
     }
 }
