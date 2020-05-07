@@ -24,7 +24,7 @@ namespace Budget.Core.Lab
             var startBudget = GetBudget(start);
             var startAmount = startBudget?.Amount ?? 0;
             decimal startDailyAmount = startAmount / startMonthDays;
-            var s = (startMonthDays - start.Day + 1) * startDailyAmount;
+            // var s = (startMonthDays - start.Day + 1) * startDailyAmount;
 
             var endMonthDays = GetDaysInMonth(end);
             var endBudget = GetBudget(end);
@@ -45,23 +45,25 @@ namespace Budget.Core.Lab
             {
                 var currentMonth = start.AddMonths(i);
 
-                int currentMonthDays = 0;
+                int currentMonthDays = GetDaysInMonth(currentMonth);
+                int currentOneDay = 0;
                 if (i == 0)
                 {
-                    continue;
+                    currentOneDay = startMonthDays - start.Day + 1;
                 }
                 else
                 {
-                    currentMonthDays = GetDaysInMonth(currentMonth);
+                    currentOneDay = GetDaysInMonth(currentMonth);
                 }
 
                 var currentBudget = GetBudget(currentMonth);
                 var midAmount = currentBudget?.Amount ?? 0;
                 var midDailyAmount = midAmount / currentMonthDays;
-                tmpMid += currentMonthDays * midDailyAmount;
+                tmpMid += currentOneDay * midDailyAmount;
             }
 
-            return s + tmpMid + e;
+            return tmpMid + e;
+            // return s + tmpMid + e;
         }
 
         private int GetDaysInMonth(DateTime date)
