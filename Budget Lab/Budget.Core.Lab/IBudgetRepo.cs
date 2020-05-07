@@ -29,5 +29,10 @@ namespace Budget.Core.Lab
             var dailyAmount = Amount / DateTime.DaysInMonth(month.Year, month.Month);
             return dailyAmount;
         }
+
+        public decimal GetOverlapBudget(Period period)
+        {
+            return GetAvailableDays(period) * BudgetDailyAmount();
+        }
     }
 }

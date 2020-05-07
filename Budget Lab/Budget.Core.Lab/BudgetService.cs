@@ -29,15 +29,10 @@ namespace Budget.Core.Lab
                 var currentMonth = start.AddMonths(i);
                 var currentBudget = GetBudget(currentMonth);
 
-                result += GetOverlapBudget(start, end, currentBudget);
+                result += currentBudget.GetOverlapBudget(new Period(start, end));
             }
 
             return result;
-        }
-
-        private static decimal GetOverlapBudget(DateTime start, DateTime end, Budget currentBudget)
-        {
-            return currentBudget.GetAvailableDays(new Period(start, end)) * currentBudget.BudgetDailyAmount();
         }
 
         private int GetDaysInMonth(DateTime date)
