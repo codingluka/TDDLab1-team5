@@ -32,12 +32,17 @@ namespace Budget.Core.Lab
                 int currentMonthDays = GetDaysInMonth(currentMonth);
                 var availableDays = currentBudget.GetAvailableDays(new Period(start, end));
 
-                var currentBudgetAmount = currentBudget?.Amount ?? 0;
-                var dailyAmount = currentBudgetAmount / currentMonthDays;
+                var dailyAmount = BudgetDailyAmount(currentBudget, currentMonthDays);
                 result += availableDays * dailyAmount;
             }
 
             return result;
+        }
+
+        private static int BudgetDailyAmount(Budget currentBudget, int currentMonthDays)
+        {
+            var dailyAmount = (currentBudget?.Amount ?? 0) / currentMonthDays;
+            return dailyAmount;
         }
 
         private int GetDaysInMonth(DateTime date)
