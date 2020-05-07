@@ -40,7 +40,7 @@ namespace Budget.Core.Lab
                 return (decimal) diffDays * startDailyAmount;
             }
 
-            var tmpMid = 0m;
+            var result = 0m;
             for (var i = 0; i < diffMonth+1; i++)
             {
                 var currentMonth = start.AddMonths(i);
@@ -63,12 +63,10 @@ namespace Budget.Core.Lab
                 var currentBudget = GetBudget(currentMonth);
                 var midAmount = currentBudget?.Amount ?? 0;
                 var midDailyAmount = midAmount / currentMonthDays;
-                tmpMid += currentOneDay * midDailyAmount;
+                result += currentOneDay * midDailyAmount;
             }
 
-            return tmpMid;
-            // return tmpMid + e;
-            // return s + tmpMid + e;
+            return result;
         }
 
         private int GetDaysInMonth(DateTime date)
