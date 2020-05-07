@@ -21,13 +21,7 @@ namespace Budget.Core.Lab
                 return 0;
             }
 
-            var result = 0m;
-            foreach (var budget in this._budgetRepo.GetAll())
-            {
-                result += budget.GetOverlapBudget(new Period(start, end));
-            }
-
-            return result;
+            return this._budgetRepo.GetAll().Sum(budget => budget.GetOverlapBudget(new Period(start, end)));
         }
 
         private int GetDaysInMonth(DateTime date)
