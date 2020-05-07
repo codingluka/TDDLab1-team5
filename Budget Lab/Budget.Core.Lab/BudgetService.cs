@@ -30,7 +30,7 @@ namespace Budget.Core.Lab
             var endBudget = GetBudget(end);
             var endDailyAmount = endBudget?.Amount ?? 0;
             decimal endOneDay = endDailyAmount / endMonthDays;
-            var e = end.Day * endOneDay;
+            // var e = end.Day * endOneDay;
 
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
             if (diffMonth < 1)
@@ -41,7 +41,7 @@ namespace Budget.Core.Lab
             }
 
             var tmpMid = 0m;
-            for (var i = 0; i < diffMonth; i++)
+            for (var i = 0; i < diffMonth+1; i++)
             {
                 var currentMonth = start.AddMonths(i);
 
@@ -50,6 +50,10 @@ namespace Budget.Core.Lab
                 if (i == 0)
                 {
                     currentOneDay = startMonthDays - start.Day + 1;
+                }
+                else if(i==diffMonth)
+                {
+                    currentOneDay = end.Day;
                 }
                 else
                 {
@@ -62,7 +66,8 @@ namespace Budget.Core.Lab
                 tmpMid += currentOneDay * midDailyAmount;
             }
 
-            return tmpMid + e;
+            return tmpMid;
+            // return tmpMid + e;
             // return s + tmpMid + e;
         }
 
