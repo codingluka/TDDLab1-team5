@@ -18,7 +18,7 @@ namespace Budget.Core.Lab
         {
             if (end < start)
             {
-                return 0;
+                // return 0;
             }
 
             return this._budgetRepo.GetAll().Sum(budget => budget.GetOverlapBudget(new Period(start, end)));
