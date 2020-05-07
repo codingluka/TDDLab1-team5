@@ -29,10 +29,9 @@ namespace Budget.Core.Lab
                 var currentMonth = start.AddMonths(i);
                 var currentBudget = GetBudget(currentMonth);
 
-                int currentMonthDays = GetDaysInMonth(currentMonth);
                 var availableDays = currentBudget.GetAvailableDays(new Period(start, end));
 
-                decimal dailyAmount = currentBudget.BudgetDailyAmount(currentMonthDays);
+                decimal dailyAmount = currentBudget.BudgetDailyAmount(GetDaysInMonth(currentMonth));
                 result += availableDays * dailyAmount;
             }
 
