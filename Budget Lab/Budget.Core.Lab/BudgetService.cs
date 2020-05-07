@@ -19,6 +19,7 @@ namespace Budget.Core.Lab
             {
                 return 0;
             }
+
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
 
             var result = 0m;
@@ -43,7 +44,7 @@ namespace Budget.Core.Lab
             int result = 0;
             if (diffMonth < 1)
             {
-                result = (int) (period.End.Subtract(period.Start).TotalDays + 1);
+                result = (period.End - period.Start).Days + 1;
             }
             else if (i == 0)
             {
