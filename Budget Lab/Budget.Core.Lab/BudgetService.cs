@@ -31,7 +31,6 @@ namespace Budget.Core.Lab
 
                 int currentMonthDays = GetDaysInMonth(currentMonth);
                 var availableDays = GetAvailableDays(new Period(start, end), currentBudget);
-                // var availableDays = GetAvailableDays(new Period(start, end), currentMonth);
 
                 var currentBudgetAmount = currentBudget?.Amount ?? 0;
                 var dailyAmount = currentBudgetAmount / currentMonthDays;
