@@ -4,14 +4,15 @@ namespace Budget.Core.Lab
 {
     public class Budget
     {
+        private DateTime _month;
         public string YearMonth { get; set; }
         public int Amount { get; set; }
 
         private int GetAvailableDays(Period period)
         {
-            var month = DateTime.ParseExact(YearMonth, "yyyyMM", null);
-            var monthFirstDay = new DateTime(month.Year, month.Month, 01);
-            var monthLastDay = new DateTime(month.Year, month.Month, DateTime.DaysInMonth(month.Year, month.Month));
+            _month = DateTime.ParseExact(YearMonth, "yyyyMM", null);
+            var monthFirstDay = new DateTime(_month.Year, _month.Month, 01);
+            var monthLastDay = new DateTime(_month.Year, _month.Month, DateTime.DaysInMonth(_month.Year, _month.Month));
             var periodStart = monthFirstDay <= period.Start ? period.Start : monthFirstDay;
             var periodEnd = period.End <= monthLastDay ? period.End : monthLastDay;
             if (periodEnd >= periodStart) return (periodEnd - periodStart).Days + 1;
@@ -21,8 +22,7 @@ namespace Budget.Core.Lab
 
         private decimal BudgetDailyAmount()
         {
-            var month = DateTime.ParseExact(YearMonth, "yyyyMM", null);
-            var dailyAmount = Amount / DateTime.DaysInMonth(month.Year, month.Month);
+            var dailyAmount = Amount / DateTime.DaysInMonth(_month.Year, _month.Month);
             return dailyAmount;
         }
 
