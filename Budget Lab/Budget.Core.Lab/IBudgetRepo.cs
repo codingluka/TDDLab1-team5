@@ -22,5 +22,11 @@ namespace Budget.Core.Lab
             var periodEnd = period.End <= monthLastDay ? period.End : monthLastDay;
             return (periodEnd - periodStart).Days + 1;
         }
+
+        public decimal BudgetDailyAmount(int currentMonthDays)
+        {
+            var dailyAmount = Amount / currentMonthDays;
+            return dailyAmount;
+        }
     }
 }
