@@ -37,7 +37,7 @@ namespace Budget.Core.Lab
                 }
                 else if (i == 0)
                 {
-                    currentOneDay = startMonthDays - start.Day + 1;
+                    currentOneDay = currentMonthDays - start.Day + 1;
                 }
                 else if (i == diffMonth)
                 {
