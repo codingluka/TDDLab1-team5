@@ -31,8 +31,8 @@ namespace Budget.Core.Lab
             var endDailyAmount = endBudget?.Amount ?? 0;
             decimal endOneDay = endDailyAmount / endMonthDays;
             var e = end.Day * endOneDay;
-            
-            var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month) ;
+
+            var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
             if (diffMonth < 1)
             {
                 //// 當月超過1日
@@ -41,15 +41,24 @@ namespace Budget.Core.Lab
             }
 
             var tmpMid = 0m;
-            for (var i = 1; i < diffMonth; i++)
+            for (var i = 0; i < diffMonth; i++)
             {
                 var currentMonth = start.AddMonths(i);
-                
-                var currentMonthDays = GetDaysInMonth(currentMonth);
+
+                int currentMonthDays = 0;
+                if (i == 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    currentMonthDays = GetDaysInMonth(currentMonth);
+                }
+
                 var currentBudget = GetBudget(currentMonth);
-                var midAmount = currentBudget ?.Amount ?? 0;
+                var midAmount = currentBudget?.Amount ?? 0;
                 var midDailyAmount = midAmount / currentMonthDays;
-                tmpMid += currentMonthDays * midDailyAmount ;
+                tmpMid += currentMonthDays * midDailyAmount;
             }
 
             return s + tmpMid + e;
