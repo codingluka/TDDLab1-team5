@@ -27,25 +27,29 @@ namespace Budget.Core.Lab
             // var s = (startMonthDays - start.Day + 1) * startDailyAmount;
 
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
-            if (diffMonth < 1)
-            {
-                //// 當月超過1日
-                var diffDays = end.Subtract(start).TotalDays + 1;
-                return (decimal) diffDays * startDailyAmount;
-            }
+            // if (diffMonth < 1)
+            // {
+            //     //// 當月超過1日
+            //     var diffDays = end.Subtract(start).TotalDays + 1;
+            //     return (decimal) diffDays * startDailyAmount;
+            // }
 
             var result = 0m;
-            for (var i = 0; i < diffMonth+1; i++)
+            for (var i = 0; i < diffMonth + 1; i++)
             {
                 var currentMonth = start.AddMonths(i);
 
                 int currentMonthDays = GetDaysInMonth(currentMonth);
                 int currentOneDay = 0;
-                if (i == 0)
+                if (diffMonth < 1)
+                {
+                    currentOneDay = (int) (end.Subtract(start).TotalDays + 1);
+                }
+                else if (i == 0)
                 {
                     currentOneDay = startMonthDays - start.Day + 1;
                 }
-                else if(i==diffMonth)
+                else if (i == diffMonth)
                 {
                     currentOneDay = end.Day;
                 }
