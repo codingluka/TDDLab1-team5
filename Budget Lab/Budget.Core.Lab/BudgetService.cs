@@ -48,7 +48,7 @@ namespace Budget.Core.Lab
             }
             else if (i == 0)
             {
-                result = currentMonthDays - start.Day + 1;
+                result = GetDaysInMonth(currentMonth) - start.Day + 1;
             }
             else if (i == diffMonth)
             {
