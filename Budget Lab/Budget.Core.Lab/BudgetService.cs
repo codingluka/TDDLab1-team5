@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 
 namespace Budget.Core.Lab
 {
@@ -41,6 +42,12 @@ namespace Budget.Core.Lab
 
         private int GetAvailableDays(Period period, int diffMonth, int i, DateTime currentMonth)
         {
+            var monthFirstDay = new DateTime(currentMonth.Year,currentMonth.Month,01);
+            var monthLastDay = new DateTime(currentMonth.Year,currentMonth.Month,DateTime.DaysInMonth(currentMonth.Year,currentMonth.Month));
+            if (monthFirstDay<period.Start && period.End <monthLastDay)
+            {
+                return (period.End - period.Start).Days + 1;
+            }
             if (diffMonth < 1)
             {
                 return (period.End - period.Start).Days + 1;
