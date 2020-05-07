@@ -19,9 +19,6 @@ namespace Budget.Core.Lab
             {
                 return 0;
             }
-
-            var startMonthDays = GetDaysInMonth(start);
-
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
 
             var result = 0m;
