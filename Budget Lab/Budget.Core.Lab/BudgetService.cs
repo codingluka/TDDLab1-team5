@@ -21,18 +21,8 @@ namespace Budget.Core.Lab
             }
 
             var startMonthDays = GetDaysInMonth(start);
-            var startBudget = GetBudget(start);
-            var startAmount = startBudget?.Amount ?? 0;
-            decimal startDailyAmount = startAmount / startMonthDays;
-            // var s = (startMonthDays - start.Day + 1) * startDailyAmount;
 
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
-            // if (diffMonth < 1)
-            // {
-            //     //// 當月超過1日
-            //     var diffDays = end.Subtract(start).TotalDays + 1;
-            //     return (decimal) diffDays * startDailyAmount;
-            // }
 
             var result = 0m;
             for (var i = 0; i < diffMonth + 1; i++)
