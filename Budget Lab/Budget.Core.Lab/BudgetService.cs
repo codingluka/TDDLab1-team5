@@ -27,7 +27,7 @@ namespace Budget.Core.Lab
                 var currentMonth = start.AddMonths(i);
 
                 int currentMonthDays = GetDaysInMonth(currentMonth);
-                var availableDays = GetAvailableDays(start, end, diffMonth, i, currentMonth);
+                var availableDays = GetAvailableDays(new Period(start, end), diffMonth, i, currentMonth);
 
                 var currentBudget = GetBudget(currentMonth);
                 var currentBudgetAmount = currentBudget?.Amount ?? 0;
@@ -38,20 +38,20 @@ namespace Budget.Core.Lab
             return result;
         }
 
-        private int GetAvailableDays(DateTime start, DateTime end, int diffMonth, int i, DateTime currentMonth)
+        private int GetAvailableDays(Period period, int diffMonth, int i, DateTime currentMonth)
         {
             int result = 0;
             if (diffMonth < 1)
             {
-                result = (int) (end.Subtract(start).TotalDays + 1);
+                result = (int) (period.End.Subtract(period.Start).TotalDays + 1);
             }
             else if (i == 0)
             {
-                result = GetDaysInMonth(currentMonth) - start.Day + 1;
+                result = GetDaysInMonth(currentMonth) - period.Start.Day + 1;
             }
             else if (i == diffMonth)
             {
-                result = end.Day;
+                result = period.End.Day;
             }
             else
             {
