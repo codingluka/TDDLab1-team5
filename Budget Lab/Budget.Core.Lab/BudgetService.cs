@@ -26,12 +26,6 @@ namespace Budget.Core.Lab
             decimal startDailyAmount = startAmount / startMonthDays;
             // var s = (startMonthDays - start.Day + 1) * startDailyAmount;
 
-            var endMonthDays = GetDaysInMonth(end);
-            var endBudget = GetBudget(end);
-            var endDailyAmount = endBudget?.Amount ?? 0;
-            decimal endOneDay = endDailyAmount / endMonthDays;
-            // var e = end.Day * endOneDay;
-
             var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
             if (diffMonth < 1)
             {
