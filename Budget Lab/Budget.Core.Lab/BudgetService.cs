@@ -30,7 +30,8 @@ namespace Budget.Core.Lab
                 var currentBudget = GetBudget(currentMonth);
 
                 int currentMonthDays = GetDaysInMonth(currentMonth);
-                var availableDays = GetAvailableDays(new Period(start, end), currentMonth);
+                var availableDays = GetAvailableDays(new Period(start, end), currentBudget.YearMonth);
+                // var availableDays = GetAvailableDays(new Period(start, end), currentMonth);
 
                 var currentBudgetAmount = currentBudget?.Amount ?? 0;
                 var dailyAmount = currentBudgetAmount / currentMonthDays;
@@ -40,10 +41,11 @@ namespace Budget.Core.Lab
             return result;
         }
 
-        private int GetAvailableDays(Period period, DateTime currentMonth)
+        private int GetAvailableDays(Period period, string budgetYearMonth)
         {
-            var monthFirstDay = new DateTime(currentMonth.Year,currentMonth.Month,01);
-            var monthLastDay = new DateTime(currentMonth.Year,currentMonth.Month,DateTime.DaysInMonth(currentMonth.Year,currentMonth.Month));
+            var month = DateTime.ParseExact(budgetYearMonth,"yyyyMM",null); 
+            var monthFirstDay = new DateTime(month.Year,month.Month,01);
+            var monthLastDay = new DateTime(month.Year,month.Month,DateTime.DaysInMonth(month.Year,month.Month));
             var periodStart = monthFirstDay <= period.Start ? period.Start : monthFirstDay;
             var periodEnd = period.End <= monthLastDay ? period.End : monthLastDay;
             return (periodEnd - periodStart).Days + 1;
