@@ -27,11 +27,11 @@ namespace Budget.Core.Lab
             for (var i = 0; i < diffMonth + 1; i++)
             {
                 var currentMonth = start.AddMonths(i);
+                var currentBudget = GetBudget(currentMonth);
 
                 int currentMonthDays = GetDaysInMonth(currentMonth);
                 var availableDays = GetAvailableDays(new Period(start, end), currentMonth);
 
-                var currentBudget = GetBudget(currentMonth);
                 var currentBudgetAmount = currentBudget?.Amount ?? 0;
                 var dailyAmount = currentBudgetAmount / currentMonthDays;
                 result += availableDays * dailyAmount;
