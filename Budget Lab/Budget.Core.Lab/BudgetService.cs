@@ -44,14 +44,14 @@ namespace Budget.Core.Lab
         {
             var monthFirstDay = new DateTime(currentMonth.Year,currentMonth.Month,01);
             var monthLastDay = new DateTime(currentMonth.Year,currentMonth.Month,DateTime.DaysInMonth(currentMonth.Year,currentMonth.Month));
-            if (monthFirstDay<period.Start && period.End <monthLastDay)
+            if (monthFirstDay<=period.Start && period.End <=monthLastDay)
             {
                 return (period.End - period.Start).Days + 1;
             }
-            if (diffMonth < 1)
-            {
-                return (period.End - period.Start).Days + 1;
-            }
+            // if (diffMonth < 1)
+            // {
+            //     return (period.End - period.Start).Days + 1;
+            // }
 
             if (i == 0)
             {
