@@ -47,22 +47,6 @@ namespace Budget.Core.Lab
             var periodStart = monthFirstDay <= period.Start ? period.Start : monthFirstDay;
             var periodEnd = period.End <= monthLastDay ? period.End : monthLastDay;
             return (periodEnd - periodStart).Days + 1;
-            if (monthFirstDay<=period.Start && period.End <=monthLastDay)
-            {
-                return (period.End - period.Start).Days + 1;
-            }
-
-            if (i == 0)
-            {
-                return GetDaysInMonth(currentMonth) - period.Start.Day + 1;
-            }
-
-            if (i == diffMonth)
-            {
-                return period.End.Day;
-            }
-
-            return GetDaysInMonth(currentMonth);
         }
 
         private int GetDaysInMonth(DateTime date)
