@@ -23,7 +23,7 @@ namespace Budget.Core.Lab
             return (periodEnd - periodStart).Days + 1;
         }
 
-        public decimal BudgetDailyAmount(int currentMonthDays)
+        public decimal BudgetDailyAmount()
         {
             var month = DateTime.ParseExact(this.YearMonth, "yyyyMM", null);
             var dailyAmount = Amount / DateTime.DaysInMonth(month.Year, month.Month);
