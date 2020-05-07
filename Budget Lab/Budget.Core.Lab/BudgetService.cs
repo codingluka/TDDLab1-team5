@@ -28,15 +28,6 @@ namespace Budget.Core.Lab
             }
 
             return result;
-            var diffMonth = end.Year * 12 + end.Month - (start.Year * 12 + start.Month);
-            for (var i = 0; i < diffMonth + 1; i++)
-            {
-                var currentMonth = start.AddMonths(i);
-
-                result += GetBudget(currentMonth).GetOverlapBudget(new Period(start, end));
-            }
-
-            return result;
         }
 
         private int GetDaysInMonth(DateTime date)
