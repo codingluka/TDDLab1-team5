@@ -48,10 +48,6 @@ namespace Budget.Core.Lab
             {
                 return (period.End - period.Start).Days + 1;
             }
-            // if (diffMonth < 1)
-            // {
-            //     return (period.End - period.Start).Days + 1;
-            // }
 
             if (i == 0)
             {
