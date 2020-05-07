@@ -41,25 +41,22 @@ namespace Budget.Core.Lab
 
         private int GetAvailableDays(Period period, int diffMonth, int i, DateTime currentMonth)
         {
-            int result = 0;
             if (diffMonth < 1)
             {
-                result = (period.End - period.Start).Days + 1;
-            }
-            else if (i == 0)
-            {
-                result = GetDaysInMonth(currentMonth) - period.Start.Day + 1;
-            }
-            else if (i == diffMonth)
-            {
-                result = period.End.Day;
-            }
-            else
-            {
-                result = GetDaysInMonth(currentMonth);
+                return (period.End - period.Start).Days + 1;
             }
 
-            return result;
+            if (i == 0)
+            {
+                return GetDaysInMonth(currentMonth) - period.Start.Day + 1;
+            }
+
+            if (i == diffMonth)
+            {
+                return period.End.Day;
+            }
+
+            return GetDaysInMonth(currentMonth);
         }
 
         private int GetDaysInMonth(DateTime date)
